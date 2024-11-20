@@ -1,7 +1,19 @@
 import DB from './index.js';
 import inquirer from 'inquirer';
 const db = new DB();
+import logo from 'asciiart-logo';
+const logoText = logo({
+    name: 'Employee Tracker',
+    font: 'Doom',
+    lineChars: 10,
+    padding: 2,
+    margin: 3,
+    borderColor: 'grey',
+    logoColor: 'bold-green',
+    textColor: 'green',
+}).render();
 function main() {
+    console.log(logoText);
     inquirer
         .prompt([
         {
@@ -16,6 +28,7 @@ function main() {
                 'Add role',
                 'View all departments',
                 'Add department',
+                'Delete department',
                 'Quit'
             ]
         }
@@ -42,14 +55,16 @@ function main() {
                         message: 'Last name:'
                     },
                     {
-                        type: 'input',
+                        type: 'list',
                         name: 'role',
-                        message: 'Role id:'
+                        message: 'Role:',
+                        choices: getRoleOptions
                     },
                     {
-                        type: 'input',
+                        type: 'list',
                         name: 'manager',
-                        message: 'Manager id:'
+                        message: 'Manager:',
+                        choices: getEmployeeOptions
                     }
                 ])
                     .then((answers) => {
@@ -163,6 +178,23 @@ function main() {
                     .then((answers) => {
                     db.addDepartment(answers.name).then(() => {
                         console.log('Department added');
+                        main();
+                    });
+                });
+                break;
+            case 'Delete department':
+                inquirer
+                    .prompt([
+                    {
+                        type: 'list',
+                        name: 'name',
+                        message: 'Department name:',
+                        choices: getDepartmentOptions
+                    }
+                ])
+                    .then((answers) => {
+                    db.deleteDepartment(answers.name).then(() => {
+                        console.log('Department deleted');
                         main();
                     });
                 });

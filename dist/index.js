@@ -49,7 +49,7 @@ export default class DB {
             configurable: true,
             writable: true,
             value: async () => {
-                return this.query("SELECT department.id, department.name FROM department");
+                return this.query("SELECT department.id, department.name FROM department;");
             }
         });
         Object.defineProperty(this, "addDepartment", {
@@ -58,6 +58,14 @@ export default class DB {
             writable: true,
             value: async (name) => {
                 return this.query("INSERT INTO department (name) VALUES ($1)", [name]);
+            }
+        });
+        Object.defineProperty(this, "deleteDepartment", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: async (id) => {
+                return this.query("DELETE FROM department WHERE id = $1", [id]);
             }
         });
     }

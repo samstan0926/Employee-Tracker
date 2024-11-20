@@ -63,7 +63,7 @@ addRole = async (title: string, salary: string, department: string) => {
 viewDepartments = async () => {
     
     return this.query(
-      "SELECT department.id, department.name FROM department"
+      "SELECT department.id, department.name FROM department;"
     );
 }
 addDepartment = async (name: string) => {

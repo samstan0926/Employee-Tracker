@@ -1,8 +1,22 @@
 import DB from './index.js';
 import inquirer from 'inquirer';
 const db = new DB();
+import logo from 'asciiart-logo';
 
+
+
+const logoText = logo({
+  name: 'Employee Tracker',
+  font: 'Doom',
+  lineChars: 10,
+  padding: 2,
+  margin: 3,
+  borderColor: 'grey',
+  logoColor: 'bold-green',
+  textColor: 'green',
+}).render();
 function main() {
+  console.log(logoText);
   inquirer
       .prompt([
         {
