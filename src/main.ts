@@ -15,8 +15,12 @@ const logoText = logo({
   logoColor: 'bold-green',
   textColor: 'green',
 }).render();
+console.log(logoText);
 function main() {
-  console.log(logoText);
+
+
+
+
   inquirer
       .prompt([
         {
@@ -27,9 +31,11 @@ function main() {
             'View all employees',
             'Add employee',
             'Update employee role',
+            'Delete employee',
             'View all roles',
             'Add role',
             'View all departments',
+            "Delete role",
             'Add department',
             'Delete department',
             'Quit'
@@ -63,14 +69,15 @@ function main() {
                           type: 'list',
                           name: 'role',
                           message: 'Role:',
-                          choices: getRoleOptions
+                          choices: db.getRoleOptions
                         },
                         {
                           type: 'list',
                           name: 'manager',
                           message: 'Manager:',
-                          choices: getEmployeeOptions
+                          choices: db.getEmployeeOptions,
                         }
+
                       ])
                       .then((answers) => {
                         db.addEmployee(answers.first_name, answers.last_name, answers.role, answers.manager).then(() => {
@@ -80,33 +87,13 @@ function main() {
                       });
                     break;
                   case 'Update employee role':
-                    function getRoleOptions() {
-                      return db.viewRoles().then((result) => {
-                        return result.rows.map((role) => {
-                          return {
-                            name: role.title,
-                            value: role.id
-                          };
-                        });
-                      });
-                    }
-                    function getEmployeeOptions() {
-                      return db.viewEmployees().then((result) => {
-                        return result.rows.map((employee) => {
-                          return {
-                            name: `${employee.first_name} ${employee.last_name}`,
-                            value: employee.id
-                          };
-                        });
-                      });
-                    }
                     inquirer
                       .prompt([
                         {
                           name: 'employee_id',
                           type: 'list',
                           message: 'Employee:',
-                          choices: getEmployeeOptions
+                          choices: db.getEmployeeOptions
                         },
                         
                         
@@ -114,7 +101,7 @@ function main() {
                           name: 'role_id',
                           type: 'list',
                           message: 'Role:',
-                          choices: getRoleOptions
+                          choices: db.getRoleOptions
                         },
 
                       ])
@@ -133,16 +120,7 @@ function main() {
                     });
                     break;
                   case 'Add role':
-                    function getDepartmentOptions() {
-                      return db.viewDepartments().then((result) => {
-                        return result.rows.map((department) => {
-                          return {
-                            name: department.name,
-                            value: department.id
-                          };
-                        });
-                      });
-                    }
+
                     inquirer
                       .prompt([
                         {
@@ -159,7 +137,7 @@ function main() {
                           type: 'list',
                           name: 'department_id',
                           message: 'Department:',
-                          choices: getDepartmentOptions
+                          choices: db.getDepartmentOptions
                         }
                       ])
                       .then((answers) => {
@@ -198,12 +176,46 @@ function main() {
                             type: 'list',
                             name: 'name',
                             message: 'Department name:',
-                            choices: getDepartmentOptions
+                            choices: db.getDepartmentOptions
                           }
                         ])
                         .then((answers) => {
                           db.deleteDepartment(answers.name).then(() => {
                             console.log('Department deleted');
+                            main();
+                          });
+                        });
+                      break;
+                      case 'Delete employee':
+                        inquirer
+                        .prompt([
+                          {
+                            type: 'list',
+                            name: 'name',
+                            message: 'Employee name:',
+                            choices: db.getEmployeeOptions
+                          }
+                        ])
+                        .then((answers) => {
+                          db.deleteEmployee(answers.name).then(() => {
+                            console.log('Employee deleted');
+                            main();
+                          });
+                        });
+                      break;
+                      case 'Delete role':
+                        inquirer
+                        .prompt([
+                          {
+                            type: 'list',
+                            name: 'name',
+                            message: 'Role name:',
+                            choices: db.getRoleOptions
+                          }
+                        ])
+                        .then((answers) => {
+                          db.deleteRole(answers.name).then(() => {
+                            console.log('Role deleted');
                             main();
                           });
                         });
