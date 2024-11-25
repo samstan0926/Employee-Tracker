@@ -71,7 +71,6 @@ function main() {
                 ])
                     .then((answers) => {
                     db.addEmployee(answers.first_name, answers.last_name, answers.role, answers.manager).then(() => {
-                        console.log(answers.manager);
                         console.log('Employee added');
                         main();
                     });
