@@ -1,20 +1,20 @@
-# README Generator
+# Employee Tracker
   ## Description
-  Takes user input and generates a README file. 
-  https://drive.google.com/file/d/1sCaswZWsWfEMr3GU0bqP3sjjbr-yveuD/view
+  Allows the user to interact with an employee database.
+  https://drive.google.com/file/d/1hkM5ycEFEfKa3p9jBk46HZ9cJGcGjvuq/view
   ## Badges
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
   ## Table of Contents
- - [Installation](#installation)
- - [Usage](#usage)
- - [Credits](#questions)
- - [License](#license)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Credits](#credits)
+- [License](#license)
   
 
   ## Installation
-  From my username on github.
+  Go to my github repository.
   ## Usage
-  Run the index.js file and type in the input.
+  Start the main.js file and enter your input.
   ## License
   
     Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), 
@@ -29,13 +29,11 @@
   https://opensource.org/licenses/MIT
 
   ## How to Contribute
-  Contact me from my contact info in the the questions section.
-  ## Tests
-  Use the project
+  Contact me from my contact information.
+  
   ## Questions
 
   Email: samstan092@gmail.com
 
   GitHub: https://github.com/samstan0926
-
-
+  
